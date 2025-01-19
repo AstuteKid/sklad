@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Sklad')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets\css\bootstrap.min.css') }}">
 </head>
 <body>
 
@@ -26,6 +26,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Sklad</a>
                         </li>
+                        @if(auth()->user()->role == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dashboard') }}">Админ панель</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                         </li>
@@ -57,9 +62,9 @@
         @endif
 
         @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @endif
 
         @yield('content')
